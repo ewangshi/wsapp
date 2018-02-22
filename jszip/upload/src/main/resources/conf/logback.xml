@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+	<appender name="log_console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{60}-%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="log_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{60}-%msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/log/gwbnsh/upload/service.info.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+			<level>INFO</level>   
+			<onMatch>ACCEPT</onMatch>   
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	
+	<appender name="log_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{60}-%msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/log/gwbnsh/upload/service.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+			<level>ERROR</level>   
+			<onMatch>ACCEPT</onMatch>   
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+	
+	<appender name="log_debug" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{60}-%msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>/log/gwbnsh/upload/service.debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">   
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<logger name="org.springframework" level="INFO" />
+	<logger name="httl" level="INFO" />
+	<logger name="org.apache.velocity.tools" level="ERROR" />
+	<logger name="java.sql" level="INFO" />
+	<logger name="com.alibaba" level="INFO" />
+	<logger name="cn.net.gwbnsh" level="INFO" />
+
+	<root level="INFO">
+		<appender-ref ref="log_console" />
+		<appender-ref ref="log_debug" />
+		<appender-ref ref="log_info" />
+		<appender-ref ref="log_error" />
+	</root>
+
+</configuration>
