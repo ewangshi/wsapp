@@ -36,6 +36,12 @@
 	    });
 	}
 
+	
+	/**
+	 * file: 图片文件
+	 * url: 上传路径
+	 * config: {width:宽, height: 高, quality: 质量, onSuccess: 上传成功后回调事件, onError: 上传失败(网络)后回调事件, onerror: 选择文件不是图片后回调事件} 
+	 */
 	function upload(file, url, config) {
 		var image = new Image();
 		var reader = new FileReader();
