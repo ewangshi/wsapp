@@ -1,5 +1,5 @@
 /*
- * Copyright © 2018 ewangshi.xyz
+ * Copyright © 2018 ewangshi.xyz version 0.1
  * The MIT License
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -48,7 +48,8 @@
 	/**
 	 * file: 图片文件
 	 * url: 上传路径
-	 * config: {width:宽, height: 高, quality: 质量, onSuccess: 上传成功后回调事件, onError: 上传失败(网络)后回调事件, onerror: 选择文件不是图片后回调事件} 
+	 * filename: 表单名称
+	 * config: {width:宽, height: 高, quality: 质量, onSuccess: 上传成功后回调事件, onSendError: 上传失败(网络)后回调事件, notImage: 选择文件不是图片后回调事件} 
 	 */
 	function upload(file, url, config) {
 		var image = new Image();
@@ -81,8 +82,8 @@
 						config.onSuccess(xhr.responseText);
 					}
 				} else if (xhr.readyState == 4 && xhr.status != 200) {
-					if (config.onError) {
-						config.onError(xhr.status, xhr.responseText);
+					if (config.onSendError) {
+						config.onSendError(xhr.status, xhr.responseText);
 					}
 				}
 			};
@@ -93,7 +94,7 @@
 		
 		image.onerror = function() {
 			if (config.notImage) {
-				config.notImage(xhr.responseText);
+				config.notImage();
 			}
 		};
 	}
